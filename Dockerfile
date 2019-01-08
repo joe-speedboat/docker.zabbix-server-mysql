@@ -10,7 +10,7 @@ ARG APK_FLAGS_DEV="${APK_FLAGS_COMMON} --no-cache"
 RUN apk add ${APK_FLAGS_DEV} bind-tools nmap curl
 
 # enable and allow sudo
-RUN apk add ${APK_FLAGS_DEV} sudo && echo 'zabbix ALL=(ALL) NOPASSWD:/usr/bin/sudo /usr/bin/nmap -O' >> /etc/sudoers
+RUN apk add ${APK_FLAGS_DEV} sudo && echo 'zabbix ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 # keep this from underlying container
 EXPOSE 10051/TCP
