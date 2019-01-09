@@ -15,7 +15,6 @@ RUN apk add ${APK_FLAGS_DEV} sudo && echo 'zabbix ALL=(ALL) NOPASSWD: ALL' >> /e
 # keep this from underlying container
 EXPOSE 10051/TCP
 
-
 # keep this from underlying container
 VOLUME ["/usr/lib/zabbix/alertscripts", "/usr/lib/zabbix/externalscripts", "/var/lib/zabbix/enc", "/var/lib/zabbix/mibs", "/var/lib/zabbix/modules"]
 VOLUME ["/var/lib/zabbix/snmptraps", "/var/lib/zabbix/ssh_keys", "/var/lib/zabbix/ssl/certs", "/var/lib/zabbix/ssl/keys", "/var/lib/zabbix/ssl/ssl_ca"]
