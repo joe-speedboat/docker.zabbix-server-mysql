@@ -1,10 +1,13 @@
-FROM zabbix/zabbix-server-mysql:alpine-4.0.2
+FROM zabbix/zabbix-server-mysql:alpine-4.0.3
 LABEL maintainer="Chris Ruettimann <chris@bitbull.ch>"
 
 # keep this from underlying container
 ARG APK_FLAGS_COMMON=""
 ARG APK_FLAGS_PERSISTENT="${APK_FLAGS_COMMON} --clean-protected --no-cache"
 ARG APK_FLAGS_DEV="${APK_FLAGS_COMMON} --no-cache"
+
+# show version info
+RUN echo "zabbix/zabbix-server-mysql:alpine-4.0.3" > /etc/zabbix-version
 
 # add needed software
 RUN apk add ${APK_FLAGS_DEV} bind-tools nmap curl iftop
