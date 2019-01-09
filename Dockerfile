@@ -1,4 +1,4 @@
-FROM zabbix/zabbix-server-mysql:alpine-4.0.3
+FROM zabbix/zabbix-server-mysql:alpine-4.0.2
 LABEL maintainer="Chris Ruettimann <chris@bitbull.ch>"
 
 # keep this from underlying container
