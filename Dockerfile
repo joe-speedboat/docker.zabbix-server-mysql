@@ -10,7 +10,7 @@ ARG APK_FLAGS_DEV="${APK_FLAGS_COMMON} --no-cache"
 RUN echo "zabbix/zabbix-server-mysql:alpine-4.0.3" > /etc/zabbix-version
 
 # add needed software
-RUN apk add ${APK_FLAGS_DEV} bind-tools nmap curl iftop
+RUN apk add ${APK_FLAGS_DEV} bind-tools nmap curl iftop openssl bc
 
 # enable and allow sudo
 RUN apk add ${APK_FLAGS_DEV} sudo && echo 'zabbix ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
