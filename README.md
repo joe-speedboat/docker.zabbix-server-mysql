@@ -6,8 +6,3 @@ zabbix server mod for my needs
 sh build.sh
 ```
 
-# EXPORT
-
-```
-docker save zabbix-server-mysql:alpine-trunk  | gzip -c > zabbix-server-mysql.tar.gz
-```
