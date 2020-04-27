@@ -1,8 +1,8 @@
-FROM zabbix/zabbix-server-mysql:alpine-4.4.3
+FROM zabbix/zabbix-server-mysql:alpine-4.4.7
 LABEL maintainer="Chris Ruettimann <chris@bitbull.ch>"
 
 # keep this from underlying container
-ARG VERSION=alpine-4.4.3
+ARG VERSION=alpine-4.4.7
 ARG APK_FLAGS_COMMON=""
 ARG APK_FLAGS_PERSISTENT="${APK_FLAGS_COMMON} --clean-protected --no-cache"
 ARG APK_FLAGS_DEV="${APK_FLAGS_COMMON} --no-cache"
