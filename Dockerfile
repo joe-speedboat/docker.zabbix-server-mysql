@@ -1,8 +1,8 @@
-FROM zabbix/zabbix-server-mysql:alpine-4.4.7
+FROM zabbix/zabbix-server-mysql:alpine-5.0.0
 LABEL maintainer="Chris Ruettimann <chris@bitbull.ch>"
 
 # keep this from underlying container
-ARG VERSION=alpine-4.4.7
+ARG VERSION=alpine-5.0.0
 ARG APK_FLAGS_COMMON=""
 ARG APK_FLAGS_PERSISTENT="${APK_FLAGS_COMMON} --clean-protected --no-cache"
 ARG APK_FLAGS_DEV="${APK_FLAGS_COMMON} --no-cache"
@@ -12,7 +12,7 @@ USER root
 RUN echo "zabbix/zabbix-server-mysql:$VERSION" > /etc/zabbix-version
 
 # add needed software
-RUN apk add ${APK_FLAGS_DEV} bind-tools nmap curl iftop openssl bc
+RUN apk add ${APK_FLAGS_DEV} bind-tools nmap curl iftop openssl bc k3s jq
 
 # enable and allow sudo
 RUN apk add ${APK_FLAGS_DEV} sudo && echo 'zabbix ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
@@ -23,6 +23,9 @@ EXPOSE 10051/TCP
 # keep this from underlying container
 VOLUME ["/usr/lib/zabbix/alertscripts", "/usr/lib/zabbix/externalscripts", "/var/lib/zabbix/enc", "/var/lib/zabbix/mibs", "/var/lib/zabbix/modules"]
 VOLUME ["/var/lib/zabbix/snmptraps", "/var/lib/zabbix/ssh_keys", "/var/lib/zabbix/ssl/certs", "/var/lib/zabbix/ssl/keys", "/var/lib/zabbix/ssl/ssl_ca"]
+VOLUME ["/var/lib/zabbix/export"]
 
 # keep this from underlying container
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/docker-entrypoint.sh"]
+USER 1997
+CMD ["/usr/sbin/zabbix_server", "--foreground", "-c", "/etc/zabbix/zabbix_server.conf"]
