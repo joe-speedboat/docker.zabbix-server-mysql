@@ -12,7 +12,7 @@ USER root
 RUN echo "zabbix/zabbix-server-mysql:$VERSION" > /etc/zabbix-version
 
 # add needed software
-RUN apk add ${APK_FLAGS_DEV} bind-tools nmap curl iftop openssl bc k3s jq
+RUN apk add ${APK_FLAGS_DEV} bind-tools nmap curl iftop openssl bc jq
 
 # enable and allow sudo
 RUN apk add ${APK_FLAGS_DEV} sudo && echo 'zabbix ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
