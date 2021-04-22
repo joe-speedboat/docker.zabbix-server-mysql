@@ -1,6 +1,6 @@
 #!/bin/sh -e
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
-VERSION=alpine-5.0.0
+VERSION=alpine-5.2.6
 IMAGE=zabbix-server-mysql
 FROM="zabbix/$IMAGE"
 TO="christian773/$IMAGE"
@@ -15,6 +15,6 @@ do
 
    docker build -t $IMAGE:$V .
    docker tag $IMAGE:$V $TO:$V
-   docker push $TO
+   docker push $TO:$V
 done
 
