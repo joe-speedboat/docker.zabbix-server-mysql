@@ -1,18 +1,19 @@
 #!/bin/sh -e
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
-VERSION=alpine-5.2.6
+VERSION=6.0-alpine-latest
 IMAGE=zabbix-server-mysql
 FROM="zabbix/$IMAGE"
 TO="christian773/$IMAGE"
 
-for V in alpine-latest $VERSION
+
+cd $(dirname $0) 
+docker system prune -a -f
+sed -i "s@^FROM .*@FROM $FROM:$VERSION@" Dockerfile
+sed -i "s@^ARG VERSION=.*@ARG VERSION=$VERSION@" Dockerfile
+
+for V in $VERSION alpine-latest
 do
    cd $(dirname $0) 
-   docker system prune -a -f
-
-   sed -i "s@^FROM .*@FROM $FROM:$V@" Dockerfile
-   sed -i "s@^ARG VERSION=.*@ARG VERSION=$V@" Dockerfile
-
    docker build -t $IMAGE:$V .
    docker tag $IMAGE:$V $TO:$V
    docker push $TO:$V

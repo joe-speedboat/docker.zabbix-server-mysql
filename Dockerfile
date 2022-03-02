@@ -1,8 +1,8 @@
-FROM zabbix/zabbix-server-mysql:alpine-5.2.6
+FROM zabbix/zabbix-server-mysql:6.0-alpine-latest
 LABEL maintainer="Chris Ruettimann <chris@bitbull.ch>"
 
 # keep this from underlying container
-ARG VERSION=alpine-5.2.6
+ARG VERSION=6.0-alpine-latest
 ARG APK_FLAGS_COMMON=""
 ARG APK_FLAGS_PERSISTENT="${APK_FLAGS_COMMON} --clean-protected --no-cache"
 ARG APK_FLAGS_DEV="${APK_FLAGS_COMMON} --no-cache"
@@ -14,10 +14,7 @@ RUN echo "zabbix/zabbix-server-mysql:$VERSION" > /etc/zabbix-version
 # add needed software
 RUN apk add ${APK_FLAGS_DEV} bind-tools nmap curl iftop openssl bc jq 
 
-# use fping 5.x
-RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories ; apk update ; apk del fping ; apk add fping ; sed -i '/edge/d' /etc/apk/repositories ; apk update
-
-# add devel software :-)
+# add essential software :-)
 RUN apk add ${APK_FLAGS_DEV} vim
 
 # enable and allow sudo
