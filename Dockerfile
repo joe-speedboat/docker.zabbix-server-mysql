@@ -13,7 +13,8 @@ RUN echo "zabbix/zabbix-server-mysql:$VERSION" > /etc/zabbix-version
 
 # add needed software
 RUN apk add ${APK_FLAGS_DEV} bind-tools nmap curl iftop openssl bc jq
-RUN chmod +s /usr/sbin/fping
+
+RUN setcap cap_net_raw,cap_net_admin+ep /usr/sbin/fping
 
 # add essential software :-)
 RUN apk add ${APK_FLAGS_DEV} vim
