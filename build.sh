@@ -1,6 +1,6 @@
 #!/bin/sh -e
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
-VERSION=6.0-alpine-latest
+VERSION=6.2-alpine-latest
 IMAGE=zabbix-server-mysql
 FROM="zabbix/$IMAGE"
 TO="christian773/$IMAGE"

@@ -1,8 +1,8 @@
-FROM zabbix/zabbix-server-mysql:6.0-alpine-latest
+FROM zabbix/zabbix-server-mysql:6.2-alpine-latest
 LABEL maintainer="Chris Ruettimann <chris@bitbull.ch>"
 
 # keep this from underlying container
-ARG VERSION=6.0-alpine-latest
+ARG VERSION=6.2-alpine-latest
 ARG APK_FLAGS_COMMON=""
 ARG APK_FLAGS_PERSISTENT="${APK_FLAGS_COMMON} --clean-protected --no-cache"
 ARG APK_FLAGS_DEV="${APK_FLAGS_COMMON} --no-cache"
@@ -12,7 +12,8 @@ USER root
 RUN echo "zabbix/zabbix-server-mysql:$VERSION" > /etc/zabbix-version
 
 # add needed software
-RUN apk add ${APK_FLAGS_DEV} bind-tools nmap curl iftop openssl bc jq 
+RUN apk add ${APK_FLAGS_DEV} bind-tools nmap curl iftop openssl bc jq
+RUN chmod +s /usr/sbin/fping
 
 # add essential software :-)
 RUN apk add ${APK_FLAGS_DEV} vim
